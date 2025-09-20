@@ -1,14 +1,63 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 export default function QueryForm() {
   const [query, setQuery] = useState("");
   const [searchType, setSearchType] = useState("author");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`Searching by ${searchType}: ${query}`);
+
+    const mockResults =
+        searchType === "author"
+         ? [
+            {
+                title: "Graph Databases for Research",
+                year: 2022,
+                doi: "10.1234/mock1",
+                topics: ["Knowledge Graphs", "AI"],
+                datasets: ["Dataset A", "Dataset B"],
+            },
+            {
+                title: "Neo4j in Decentralized Systems",
+                year: 2023,
+                doi: "10.1234/mock2",
+                topics: ["Blockchain"],
+                datasets: ["Dataset X"],
+            },
+           ]
+         : [
+            {
+                title: "Blockchain for Science",
+                year: 2021,
+                doi: "10.5678/mock3",
+            },
+            {
+                title: "Decentralized Knowledge Sharing",
+                year: 2024,
+                doi: "10.5678/mock4",
+            },
+            ];
+
+    console.log("Mock API Response:", mockResults);
   };
 
+    /*try {
+      let url = "";
+
+      if (searchType === "author") {
+        url = `/api/papers?author=${encodeURIComponent(query)}`;
+      } else {
+        url = `/api/papers/topic/${encodeURIComponent(query)}`;
+      }
+
+      const res = await axios.get(url);
+      console.log("API Response:", res.data); 
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    }
+  };*/
+    
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center">Search Papers</h2>
