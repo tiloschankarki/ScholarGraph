@@ -1,6 +1,7 @@
 import React from "react";
 import QueryForm from "../components/QueryForm";
 import GraphView from "../components/GraphView";
+import AddPaperForm from "../components/AddPaperForm";
 
 export default function Dashboard() {
   return (
@@ -8,6 +9,7 @@ export default function Dashboard() {
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
       <QueryForm />
       <GraphView />
+      <AddPaperForm />
     </div>
   );
 }
