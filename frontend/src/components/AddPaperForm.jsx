@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TxDisplay from "./TxDisplay";
 
 export default function AddPaperForm() {
   const [formData, setFormData] = useState({
@@ -11,8 +12,10 @@ export default function AddPaperForm() {
     dataset: "",
   });
 
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [message, setMessage] = useState("");
+  const [paperData, setPaperData] = useState(null);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,12 +24,14 @@ export default function AddPaperForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccess(null);
-    setError(null);
+    setStatus(null);
+    setMessage("");
+    setPaperData(null);
 
     // Validate required fields
     for (let key in formData) {
       if (!formData[key]) {
+        setStatus("error");
         setError(`Field "${key}" is required.`);
         return;
       }
@@ -37,10 +42,9 @@ export default function AddPaperForm() {
       await new Promise((res) => setTimeout(res, 1000));
 
       // Mock success response 
-      setSuccess({
-        message: "✅ Paper added successfully!",
-        paper: { ...formData },
-      });
+      setStatus("success");
+      setMessage( "✅ Paper added successfully!");
+      setPaperData ({ ...formData });
 
       // Clear form
       setFormData({
@@ -53,7 +57,8 @@ export default function AddPaperForm() {
         dataset: "",
       });
     } catch (err) {
-      setError("❌ Failed to add paper. Please try again.");
+      setStatus("error");  
+      setMessage("❌ Failed to add paper. Please try again.");
     }
   };
 
@@ -82,18 +87,8 @@ export default function AddPaperForm() {
         </button>
       </form>
 
-      {/* Success & Error Messages */}
-      {error && (
-        <div className="mt-4 p-3 bg-red-100 text-red-700 border border-red-300 rounded">
-          {error}
-        </div>
-      )}
-      {success && (
-        <div className="mt-4 p-3 bg-green-100 text-green-700 border border-green-300 rounded">
-          {success.message} <br />
-          <strong>{success.paper.title}</strong> ({success.paper.year})
-        </div>
-      )}
+      {/* Transaction Display */}
+      <TxDisplay status={status} message={message} data={paperData} />
     </div>
   );
 }
