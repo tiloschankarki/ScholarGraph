@@ -6,11 +6,17 @@ export default function QueryForm() {
   const [query, setQuery] = useState("");
   const [searchType, setSearchType] = useState("author");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);   
+  const [error, setError] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    const mockResults =
+    try{
+        await new Promise((res) => setTimeout(res, 1000));
+        const mockResults =
         searchType === "author"
          ? [
             {
@@ -41,7 +47,15 @@ export default function QueryForm() {
             },
             ];
 
-    setResults(mockResults);
+        setResults(mockResults);
+      } catch (err) {
+        setError("Failed to fetch results. Please try again.");
+      } finally {
+        setLoading(false);
+
+      }
+
+    
   };
 
     /*try {
@@ -95,11 +109,20 @@ export default function QueryForm() {
             </form>
         </div>
 
+        {/* Error */}
+        {error && (
+            <div className="mt-4 p-3 bg-red-100 text-red-700 border border-red-300 rounded">
+            {error}
+            </div>
+        )}
+
         {/* Results */}
         <div className="mt-6">
-        {results.length === 0 ? (
+        {loading ? (
+            <p className="text-sm text-gray-600 text-center"> Fetching results </p>
+        ) : results.length === 0 ? (
             <p className="text-sm text-gray-600 text-center">
-            No results yet — try a search above.
+                No results yet — try a search above.
             </p>
         ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
