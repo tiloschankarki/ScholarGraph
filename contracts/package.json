@@ -14,5 +14,8 @@
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "dotenv": "^17.2.2",
     "hardhat": "^2.26.3"
+  },
+  "dependencies": {
+    "neo4j-driver": "^5.28.2"
   }
 }
