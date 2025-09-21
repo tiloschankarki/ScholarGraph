@@ -1,36 +1,38 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import { BrowserRouter, Routes, Route, useLocation} from "react-router-dom";
 import Navbar from "./components/Navbar";
 
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import AddPaper from "./pages/AddPaper";
+import Graph from "./pages/Graph";
+
+function Layout() {
+  const location = useLocation();
+  const hideNavbar = location.pathname === "/"; // no navbar on home
+
+  return (
+    <>
+      {!hideNavbar && <Navbar />}
+      <div className={!hideNavbar ? "pt-16" : ""}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/add" element={<AddPaper />} />
+          <Route path="/graph" element={<Graph />} />
+        </Routes>
+      </div>
+    </>
+  );
+}
+    
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar /> 
-
-      {/* Routes */}
-      <div className="pt-16">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="flex items-center justify-center min-h-screen bg-gray-100">
-                <h2 className="text-2xl font-bold">Welcome to ScholarGraph</h2>
-              </div>
-            }
-          />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route
-            path="/about"
-            element={
-              <div className="flex items-center justify-center min-h-screen bg-light">
-                <h2 className="text-2xl font-bold text-primary">About Page</h2>
-              </div>
-            }
-          />
-        </Routes>
-      </div>
+      <Layout/>
     </BrowserRouter>
   );
+
 }
+ 

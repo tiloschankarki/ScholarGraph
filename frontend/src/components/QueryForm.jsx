@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import PaperCard from "./PaperCard";
 import axios from "axios";
 
-export default function QueryForm() {
-  const [query, setQuery] = useState("");
-  const [searchType, setSearchType] = useState("author");
+export default function QueryForm({ initialQuery = "", initialType = "author" }) {
+  const [query, setQuery] = useState(initialQuery);
+  const [searchType, setSearchType] = useState(initialType);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);   
   const [error, setError] = useState(null); 
