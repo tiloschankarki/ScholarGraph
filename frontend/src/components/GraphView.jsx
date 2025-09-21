@@ -54,9 +54,15 @@ export default function GraphView() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      style={{ height: "500px", border: "1px solid #ddd", borderRadius: "8px" }}
-    />
+     <div className="bg-light rounded-lg shadow-inner p-4">
+      <div
+        ref={containerRef}
+        style={{ height: "500px", borderRadius: "8px" }}
+        className="bg-white border border-gray-200"
+      />
+      <p className="text-center text-sm text-gray-500 mt-3">
+        Hover over nodes or zoom in/out to explore collaborations
+      </p>
+     </div>
   );
 }
