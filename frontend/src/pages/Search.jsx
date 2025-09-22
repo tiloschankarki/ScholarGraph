@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import PaperCard from "../components/PaperCard.jsx";
 import miniLogo from "../assets/minischolar.png";
+console.log("PaperCard import:", PaperCard);
 
 export default function Search() {
   const location = useLocation();
@@ -148,33 +150,12 @@ export default function Search() {
           {!loading && results.length === 0 && (
             <p className="text-white">No results found.</p>
           )}
-          <ul className="space-y-4">
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {results.map((p, i) => (
-              <li key={i} className="bg-white p-4 rounded-md shadow">
-                <h3 className="text-lg font-semibold">{p.title}</h3>
-                {p.year && <p className="text-sm">Year: {p.year}</p>}
-                {p.doi && <p className="text-sm">DOI: {p.doi}</p>}
-                {p.publisher && <p className="text-sm">Publisher: {p.publisher}</p>}
-                {p.institution && <p className="text-sm">Institution: {p.institution}</p>}
-                {p.link && (
-                  <a
-                    href={p.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 underline"
-                  >
-                    View Paper
-                  </a>
-                )}
-                {p.topics && p.topics.length > 0 && (
-                  <p className="text-sm mt-2">Topics: {p.topics.join(", ")}</p>
-                )}
-                {p.datasets && p.datasets.length > 0 && (
-                  <p className="text-sm">Datasets: {p.datasets.join(", ")}</p>
-                )}
-              </li>
+           <PaperCard key={i} paper={p} />
             ))}
           </ul>
+
         </div>
       </div>
     </div>
