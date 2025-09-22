@@ -1,7 +1,7 @@
 import express from "express";
 import { driver } from "./db.js";
 import { ethers } from "ethers";
-import contractABI from "../../contracts/artifacts/contracts/ScholarGraph.sol/ScholarGraph.json" with{ type: "json" };
+import contractABI from "../../contracts/artifacts/contracts/ScholarGraph.sol/ScholarGraph.json" with{ type : "json" };
 
 const router = express.Router();
 
