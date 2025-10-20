@@ -38,12 +38,12 @@ export default function PaperCard({ paper }) {
         <div className="fixed inset-0 z-[9999] flex items-center justify-center">
           {/* Background overlay */}
           <div
-            className="absolute inset-0 bg-black bg-opacity-70"
+            className="absolute inset-0 bg-black bg-opacity-80 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           ></div>
 
           {/* Modal content */}
-          <div className="relative bg-white rounded-lg shadow-xl w-11/12 max-w-lg md:w-[600px] max-h-[90vh] overflow-y-auto p-6 z-[10000]">
+          <div className="relative bg-[#A39A8D] rounded-lg shadow-xl w-11/12 max-w-lg md:w-[600px] max-h-[90vh] overflow-y-auto p-6 z-[10000]">
             {/* Close button */}
             <button
               onClick={() => setIsOpen(false)}

@@ -54,98 +54,106 @@ export default function Search() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-black text-white flex flex-col px-8">
       {/* Top header row */}
       <div className="flex items-center justify-between px-6 py-6 relative">
         {/* Logo */}
         <img
           src={miniLogo}
           alt="Scholar Graph"
-          className="w-[170px] h-[170px] object-contain"
+          className="w-[150px] h-[150px] object-contain"
         />
 
         {/* Search box */}
-        <div
-          className="absolute flex items-center gap-2"
-          style={{
-            top: "40px",
-            left: "250px",
-            width: "600px",
-            height: "40px",
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
           }}
+          className="flex items-center gap-3"
         >
-          {/* Dropdown for search type */}
-          <select
-            value={type}
-            onChange={(e) =>
-              navigate(`/search?q=${encodeURIComponent(searchValue)}&type=${e.target.value}`)
-            }
-            className="rounded-md bg-[#A39A8D] text-white px-2 py-1 focus:outline-none"
-            style={{ borderRadius: "10px", height: "40px" }}
-          >
-            <option value="author">Author</option>
-            <option value="topic">Topic</option>
-            <option value="publisher">Publisher</option>
-          </select>
-
-          <input
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder={`Search by ${type}`}
-            className="flex-1 h-full rounded-[10px] bg-[#A39A8D] outline-none text-white placeholder-white text-lg px-3"
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          />
-          <button
-            onClick={handleSearch}
-            className="w-[62px] h-full flex items-center justify-center rounded-lg hover:opacity-90"
+          {/* input + select */}
+          <div
             style={{
               backgroundColor: "#A39A8D",
               borderRadius: "10px",
+              padding: "6px 10px",
+              height: "30px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
             }}
           >
-            <span style={{ fontSize: "25px", lineHeight: "1" }}>🔍</span>
-          </button>
-        </div>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder={`Search by ${type}`}
+              className="text-white placeholder-white/80 bg-transparent px-4 focus:outline-none"
+              style={{ width: "360px", height: "36px", border: "none" }}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
 
-        {/* Hamburger menu */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="absolute top-8 right-8 flex flex-col justify-between w-8 h-6 cursor-pointer z-50"
-        >
-          <span className="block w-8 h-1 bg-white rounded"></span>
-          <span className="block w-8 h-1 bg-white rounded"></span>
-          <span className="block w-8 h-1 bg-white rounded"></span>
-        </button>
-      </div>
+            <select
+              value={type}
+              onChange={(e) =>
+                navigate(
+                  `/search?q=${encodeURIComponent(searchValue)}&type=${e.target.value}`
+                )
+              }
+              className="bg-transparent focus:outline-none"
+              style={{
+                border: "none",
+                height: "36px",
+                color: "black",
+                fontWeight: 500,
+              }}
+            >
+              <option value="author">Author</option>
+              <option value="topic">Topic</option>
+              <option value="publisher">Publisher</option>
+            </select>
+          </div>
 
-      {/* Slide-out menu */}
-      {menuOpen && (
-        <div className="fixed top-0 right-0 h-full w-64 bg-gray-900 shadow-lg p-6 space-y-6">
+          {/* separate search button with a gap */}
           <button
-            className="absolute top-4 right-4 text-white"
-            onClick={() => setMenuOpen(false)}
+            type="submit"
+            className="hover:opacity-80 transition flex items-center justify-center"
+            style={{
+              backgroundColor: "#A39A8D",
+              width: "45px",
+              height: "42px",
+              borderRadius: "10px",
+              border: "none",
+              marginLeft: "10px",
+            }}
           >
-            ✖
+            <span style={{ fontSize: "20px" }}>🔍</span>
           </button>
-          <Link to="/" className="block hover:text-[#fcb53b]">
+        </form>
+        {/* Navigation Links */}
+        <div className="flex items-center justify-end pr-12 gap-8 text-lg  ">
+          <Link
+            to="/"
+            className="text-[#A39A8D] hover:underline hover:text-white transition-all hover:opacity-80 "
+          >
             Home
           </Link>
-          <Link to="/add" className="block hover:text-[#fcb53b]">
+          <Link
+            to="/add"
+            className="text-[#A39A8D] hover:underline hover:text-white transition-all hover:opacity-80 "
+          >
             Add a Paper
           </Link>
-          <Link to="/graph" className="block hover:text-[#fcb53b]">
-            Graph
-          </Link>
         </div>
-      )}
-
+      </div>  
+    
       {/* Results section */}
-      <div className="flex justify-center mt-[118px] px-6">
-        <div className="w-full md:w-4/5 lg:w-2/3 bg-[#A39A8D] rounded-lg p-10 text-black">
-          <h2 className="text-2xl font-bold mb-4 text-center text-white">
-            Results for {type}: <span className="text-yellow-400">{q}</span>
-          </h2>
+      <div className="flex justify-center mt-[50px] px-6">
+        <div className="w-full md:w-4/5 lg:w-2/3 bg-[#A39A8D] rounded-lg p-10 text-black "
+        style={{ borderRadius: "10px" }}
+        >
+        
           {loading && <p className="text-white">Loading...</p>}
           {!loading && results.length === 0 && (
             <p className="text-white">No results found.</p>

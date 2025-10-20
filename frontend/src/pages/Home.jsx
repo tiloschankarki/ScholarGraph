@@ -48,68 +48,80 @@ export default function Home() {
       {/* Search row */}
       <form
         onSubmit={goSearch}
-        className="absolute flex gap-4 items-center"
+        className="absolute flex items-center justify-center gap-2"
         style={{ top: "500px" }}
       >
-        <select
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          className="rounded-md bg-[#A39A8D] text-white px-2 py-1 focus:outline-none"
-          style={{ borderRadius: "10px", height: "40px" }}
+        <div
+          style={{
+            backgroundColor: "#A39A8D",
+            borderRadius: "10px",
+            padding: "6px 10px",
+            height: "30px",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+          }}
         >
-          <option value="author">Author</option>
-          <option value="topic">Topic</option>
-          <option value="publisher">Publisher</option>
-        </select>
-
-        <div className="relative">
           <input
             type="text"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder={`Search by ${type}`}
-            className="rounded-md bg-[#A39A8D] text-white placeholder-white/90 focus:outline-none px-4"
-            style={{ width: "300px", height: "40px", borderRadius: "10px" }}
+            className="text-white placeholder-white/80 bg-transparent px-4 focus:outline-none"
+            style={{
+              width: "360px",
+              height: "36px",
+              border: "none",
+            }}
           />
-          {suggestions.length > 0 && (
-            <ul className="absolute bg-white text-black w-full rounded-md mt-1 shadow-md max-h-40 overflow-y-auto z-10">
-              {suggestions.map((s, i) => (
-                <li
-                  key={i}
-                  className="px-3 py-1 hover:bg-gray-200 cursor-pointer"
-                  onClick={() => {
-                    setQ(s);
-                    setSuggestions([]);
-                  }}
-                >
-                  {s}
-                </li>
-              ))}
-            </ul>
-          )}
+
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="bg-transparent text-white focus:outline-none"
+            style={{
+              border: "none",
+              height: "36px",
+              color: "black",
+              fontWeight: 500,
+            }}
+          >
+            <option value="author">Author</option>
+            <option value="topic">Topic</option>
+            <option value="publisher">Publisher</option>
+          </select>
         </div>
 
         <button
           type="submit"
-          className="rounded-md font-medium bg-[#A39A8D] text-white hover:opacity-90 transition"
-          style={{ width: "45px", height: "40px", borderRadius: "10px" }}
+          className="bg-[#A39A8D] text-white hover:opacity-80 transition flex items-center justify-center"
+          style={{
+            width: "45px",
+            height: "42px",
+            borderRadius: "10px",
+            border: "none",
+            marginLeft: "10px",
+
+          }}
         >
-          <span style={{ fontSize: "22px", lineHeight: "1" }}>🔍</span>
+          <span style={{ fontSize: "20px" }}>🔍</span>
         </button>
       </form>
 
       <button
         type="button"
-        className="absolute rounded-md font-medium bg-[#A39A8D] text-white hover:opacity-90 transition"
+        className="absolute font-medium bg-[#A39A8D] text-white hover:opacity-90 transition-shadow"
         style={{
-          bottom: "40px",
-          right: "40px",
+          bottom: "60px",
+          right: "60px",
           width: "120px",
-          height: "40px",
+          height: "45px",
           borderRadius: "10px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+          letterSpacing: "0.3px",
         }}
         onClick={() => navigate("/add")}
       >

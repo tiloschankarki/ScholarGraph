@@ -149,6 +149,7 @@ router.get("/api/suggest/authors", async (req, res) => {
     const result = await session.run(query, { q });
     res.json(result.records.map((r) => r.get("author")));
   } catch (err) {
+    console.error("❌ Error in /api/suggest/authors:", err)
     res.status(500).json({ error: err.message });
   } finally {
     await session.close();
