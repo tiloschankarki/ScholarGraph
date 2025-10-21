@@ -54,7 +54,7 @@ export default function Search() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col px-8">
+    <div className="min-h-screen bg-black/95 text-white flex flex-col px-8 relative overflow-hidden">
       {/* Top header row */}
       <div className="flex items-center justify-between px-6 py-6 relative">
         {/* Logo */}
