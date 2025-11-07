@@ -64,7 +64,8 @@ export default function AddPaperForm() {
 
  return (
   <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    <div className="w-full max-w-2xl bg-[rgb(233,210,180)] rounded-2xl shadow-lg p-10 md:p-12 min-h-[640px]">
+    <div className="w-full max-w-2xl bg-[rgb(233,210,180)] rounded-2xl shadow-lg p-10 md:p-12 min-h-[550px]"
+    style={{ maxWidth: "550px" }}>
       <h2 className="text-3xl font-semibold text-center mb-8 text-gray-900">Add New Paper</h2>
 
       <form onSubmit={handleSubmit}>
@@ -99,30 +100,31 @@ export default function AddPaperForm() {
               />
             </div>
           ))}
-        </div>
 
-        <div
-          style={{
-            gridColumn: "1 / span 2",   // spans both columns
-            display: "flex",
-            justifyContent: "center",   // centers horizontally
-            marginTop: "1rem",
-          }}
-        >
-          <button
-            type="submit"
+          {/* Button now inside the same grid */}
+          <div
             style={{
-              backgroundColor: "black",
-              color: "white",
-              padding: "12px 32px",
-              fontSize: "16px",
-              borderRadius: "6px",
-              border: "none",
-              cursor: "pointer",
+              gridColumn: "1 / span 2",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "1rem",
             }}
           >
-            Add Paper
-          </button>
+            <button
+              type="submit"
+              style={{
+                backgroundColor: "black",
+                color: "white",
+                padding: "12px 32px",
+                fontSize: "16px",
+                borderRadius: "6px",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              Add Paper
+            </button>
+          </div>
         </div>
       </form>
       <div className="mt-8">
