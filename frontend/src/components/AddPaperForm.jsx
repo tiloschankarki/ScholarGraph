@@ -63,20 +63,51 @@ export default function AddPaperForm() {
   };
 
  return (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    <div className="w-full max-w-2xl bg-[rgb(233,210,180)] rounded-2xl shadow-lg p-10 md:p-12 min-h-[550px]"
-    style={{ maxWidth: "550px" }}>
-      <h2 className="text-3xl font-semibold text-center mb-8 text-gray-900">Add New Paper</h2>
+  <div
+    style={{
+      minHeight: "90vh",
+      display: "flex",
+      borderRadius: "16px",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundImage: "linear-gradient(to right top, #a39a8d, #baa17b, #d0a868, #e6af54, #fcb53b)",
+      padding: "0 4rem",
+      gap: "3rem",
+    }}
+  >
+    {/* LEFT SIDE TEXT */}
+    <div style={{ flex: 1 }}>
+      <h1 style={{ fontSize: "2.5rem", fontWeight: "700", color: "#111827", marginBottom: "1rem" }}>
+        Add your research paper to ScholarGraph
+      </h1>
+      <p style={{ fontSize: "1.1rem", color: "#374151", lineHeight: "1.6" }}>
+        Showcase your work, connect with peers, and make your ideas discoverable.
+        ScholarGraph helps you record and verify academic contributions easily.
+      </p>
+    </div>
+
+    {/* RIGHT SIDE TAN CONTAINER */}
+    <div
+      style={{
+        flex: "0 0 520px",
+        backgroundColor: "rgb(233,210,180, 0.4)",
+        borderRadius: "16px",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+        padding: "2.5rem",
+        minHeight: "550px",
+      }}
+    >
+      <h2 style={{ fontSize: "1.875rem", fontWeight: "700", textAlign: "center", marginBottom: "2rem", color: "#111827" }}>
+        Add New Paper
+      </h2>
 
       <form onSubmit={handleSubmit}>
         <div
           style={{
-            padding: "10px",
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             rowGap: "1.5rem",
             columnGap: "2rem",
-            marginBottom: "1.5rem",
           }}
         >
           {Object.keys(formData).map((field) => (
@@ -101,7 +132,6 @@ export default function AddPaperForm() {
             </div>
           ))}
 
-          {/* Button now inside the same grid */}
           <div
             style={{
               gridColumn: "1 / span 2",
@@ -127,7 +157,8 @@ export default function AddPaperForm() {
           </div>
         </div>
       </form>
-      <div className="mt-8">
+
+      <div style={{ marginTop: "2rem" }}>
         <TxDisplay status={status} message={message} data={paperData} />
       </div>
     </div>
