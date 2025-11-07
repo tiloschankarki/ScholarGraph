@@ -32,7 +32,7 @@ export default function AddPaperForm() {
     for (let key in formData) {
       if (!formData[key]) {
         setStatus("error");
-        setError(`Field "${key}" is required.`);
+        setMessage(`Field "${key}" is required.`);
         return;
       }
     }
@@ -62,42 +62,73 @@ export default function AddPaperForm() {
     }
   };
 
-  return (
-    <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      {/*<h2 className="text-2xl font-bold mb-4 text-center">Add New Paper</h2> */}
+ return (
+  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="w-full max-w-2xl bg-[rgb(233,210,180)] rounded-2xl shadow-lg p-10 md:p-12 min-h-[640px]">
+      <h2 className="text-3xl font-semibold text-center mb-8 text-gray-900">Add New Paper</h2>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white rounded-lg shadow-md p-6">
-        {Object.keys(formData).map((field) => (
-          <div key={field} className="flex flex-col">
-            <label
-              htmlFor={field}
-              className="text-sm font-medium text-gray-700 mb-1"
-            >
-              {field.charAt(0).toUpperCase() + field.slice(1)}
-            </label>
-            <input
-              id={field}
-              type={field === "year" ? "number" : "text"}
-              name={field}
-              value={formData[field]}
-              onChange={handleChange}
-              placeholder= {`Enter ${field}`}
-              className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-           </div> 
+      <form onSubmit={handleSubmit}>
+        <div
+          style={{
+            padding: "10px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            rowGap: "1.5rem",
+            columnGap: "2rem",
+            marginBottom: "1.5rem",
+          }}
+        >
+          {Object.keys(formData).map((field) => (
+            <div key={field} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <label style={{ fontWeight: 600, color: "#1a1a1a" }}>
+                {field.charAt(0).toUpperCase() + field.slice(1)}
+              </label>
+              <input
+                id={field}
+                type={field === "year" ? "number" : "text"}
+                name={field}
+                value={formData[field]}
+                onChange={handleChange}
+                placeholder={`Enter ${field}`}
+                style={{
+                  padding: "12px 16px",
+                  border: "1px solid #ccc",
+                  borderRadius: "6px",
+                  outline: "none",
+                }}
+              />
+            </div>
           ))}
-          <div className="col-span-full">
-            <button
-              type="submit"
-              className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition"
-            >
-              Add Paper
-            </button>
-          </div>
-      </form>
+        </div>
 
-      {/* Transaction Display */}
-      <TxDisplay status={status} message={message} data={paperData} />
+        <div
+          style={{
+            gridColumn: "1 / span 2",   // spans both columns
+            display: "flex",
+            justifyContent: "center",   // centers horizontally
+            marginTop: "1rem",
+          }}
+        >
+          <button
+            type="submit"
+            style={{
+              backgroundColor: "black",
+              color: "white",
+              padding: "12px 32px",
+              fontSize: "16px",
+              borderRadius: "6px",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Add Paper
+          </button>
+        </div>
+      </form>
+      <div className="mt-8">
+        <TxDisplay status={status} message={message} data={paperData} />
+      </div>
     </div>
-  );
+  </div>
+);
 }
