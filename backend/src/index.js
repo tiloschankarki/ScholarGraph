@@ -14,7 +14,13 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(helmet());
-app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
+app.use(
+    cors({
+      origin: ["http://localhost:5173", "http://localhost:4173"], // allow both
+      methods: "GET,POST,PUT,DELETE,OPTIONS",
+      allowedHeaders: "Content-Type, Authorization",
+    })
+  );
 app.use(express.json());
 app.use(morgan("dev"));
 app.use("/", router);
